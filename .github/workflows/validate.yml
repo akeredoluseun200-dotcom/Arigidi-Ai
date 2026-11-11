@@ -9,7 +9,7 @@ permissions:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -19,20 +19,29 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '22'
-      - name: Build
+      - name: Build the complete Kaikai experience
         run: |
           npm install --no-audit --no-fund
           npm run build
-      - name: Verify source integrity and public links
+      - name: Validate the academy, identity and source editions
         run: |
+          node --check dist/assets/reader.js
+          node --check dist/assets/site-enhancements.js
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
-          const page=fs.readFileSync('dist/index.html','utf8');
-          const words=JSON.parse(fs.readFileSync('dist/content/scriptures.json','utf8'));
+          const html=fs.readFileSync('dist/index.html','utf8');
+          const page=fs.readFileSync('dist/reader.html','utf8');
+          const scriptures=JSON.parse(fs.readFileSync('dist/content/scriptures.json','utf8'));
           const library=JSON.parse(fs.readFileSync('dist/content/library.json','utf8'));
-          if(!page.includes('id="tutor"')||!page.includes('id="dictionary"')||!page.includes('id="library"'))throw Error('Missing site page');
-          if(words.length<1200)throw Error('Missing reference dataset');
-          if(library.length!==3||library.some(x=>!x.url.startsWith('https://')))throw Error('Missing book source links');
-          if(!fs.existsSync('dist/assets/brand-refresh.css'))throw Error('Missing design asset');
-          console.log('Kaikai build verified',words.length,'scripture excerpts');
+          const reader=JSON.parse(fs.readFileSync('dist/content/reader-index.json','utf8'));
+          const brand=JSON.parse(fs.readFileSync('dist/content/brand.json','utf8'));
+          for(const id of ['dictionary','learn','practice','heritage','library','tutor'])if(!html.includes('id="'+id+'"'))throw Error('Missing '+id+' page');
+          if(!page.includes('id="reader-pdf"'))throw Error('Missing actual scripture reader');
+          if(scriptures.length<1200)throw Error('Missing indexed references');
+          if(library.length!==2||library.some(x=>!x.url.startsWith('https://')||x.format!=='PDF'))throw Error('Incorrect complete publication links');
+          if(reader.bible.length!==66||reader.quran.length!==114)throw Error('Incorrect original document table of contents');
+          if(reader.bible.reduce((count,b)=>count+b.chapters.length,0)!==1189)throw Error('Missing Bible chapter targets');
+          if(!brand.logoUrl.includes('Baba-Kaikai.jpeg'))throw Error('Original photograph missing');
+          if(!fs.existsSync('dist/assets/v23.css')||!fs.existsSync('dist/assets/reader.css'))throw Error('Missing design assets');
+          console.log('All Kaikai checks passed — 66 Bible books, 1,189 chapters, 114 surahs,',scriptures.length,'source-indexed excerpts');
           NODE
