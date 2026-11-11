@@ -1,44 +1,46 @@
 # KAIKAI — The Arigidi Experience
 
-Official development repository for Kaikai Foundation's Arigidi Akoko learning platform.
+The Kaikai Foundation's living Arigidi Akoko language-learning platform.
 
-**Live site:** https://kaikai-foundation-arigidi.vercel.app  
-**Current release:** Version 2.1 (production READY, 11 November 2026)  
-**Production Vercel project:** `kaikai-foundation-arigidi`
+**Public website:** https://kaikai-foundation-arigidi.vercel.app  
+**Vercel project:** `kaikai-foundation-arigidi`  
+**Latest deployed update:** November 11, 2026, Version 2.2.
 
-## Release status
+## Published
 
-The Version 2 site was recovered from the existing production deployment and upgraded in a preserved copy. The new production build was deployed using this GitHub repository at commit `8ba6e91ea8dbb3406ffbb3d016228fe19a8dcf51`.
+- Original Version 2 learning pages, saved vocabulary and quizzes preserved.
+- Upgraded mobile layouts, font sizes, typography and animations.
+- Earthy evergreen, cream and clay colour scheme. No peach or pink accents.
+- Source-grounded **Talk to KAIKAI** with search over **1,254 original-language scripture excerpts** (683 Quran, 571 New Testament) plus the existing 632-entry dictionary.
+- Original Bible **2ND EDITION** and Quran in Vercel Blob public storage.
+- Quran PDF, New Testament PDF and Old Testament DOC linked from the main Library page.
 
-Seven pages: Discover, Learn, Dictionary, Practice, Heritage, Library, **Talk to KAIKAI**.
+## Publication URLs
 
-- Existing dictionary, learning paths, progress and quizzes preserved.
-- Replaced pink/peach accents with deep evergreen, cream, and warm earth tones; increased font size and added accessible animation.
-- Added reference-grounded interactive tutor interface and initial scripture excerpts. Tutor currently matches words and verified source passages; it is **not yet a free-form generative chatbot**.
-- Quran and Bible exemplar passages are in `content/scriptures.json`. Quran has no edition label; Bible is labeled 2ND EDITION.
+- Quran PDF: https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/Arigidi-Quran.pdf
+- Bible New Testament 2ND EDITION PDF: https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/Arigidi-New-Testament-2ND-Edition.pdf
+- Bible Old Testament 2ND EDITION source DOC: https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/Arigidi-Old-Testament-2ND-Edition.doc
 
-## Build
+## Structure
 
-```sh
-npm run build
-```
+`source/index.html.gz.b64`: versioned recovered source archive.  
+`assets/brand-refresh.css`: large readable typography and refreshed design.  
+`assets/site-enhancements.js`: homepage enhancements, original-image hook, and publication links.  
+`content/library.json`: original publication links.  
+`content/brand.json`: source-approved unchanged logo and home hero image URLs (currently unset).  
+`content/scripture-index.01.b64` and `content/scripture-index.02.b64`: compressed annotated source excerpt index.  
+`api/library-upload.js`: restricted public Blob client-upload handler.  
+`scripts/build.mjs`: reproducible website build.
 
-The full preserved site lives in `source/index.html.gz.b64` as an immutable compressed source artifact. The build decompresses the original site into `dist/index.html` and installs scripture data. To restore a human-readable copy for editing locally:
+To build locally: `npm install && npm run build`. To recover the full uncompressed original page: `npm run restore-source`.
 
-```sh
-npm run restore-source
-```
+## Textual integrity
 
-After editing `index.html`, recompress it with a reproducible gzip/base64 step before committing. This packaging ensures the recovered Version 2 source is preserved byte for byte.
+The scripture records are **source-matched excerpts**, not necessarily full verses, and are included for retrieval and cultural learning only. Verse interpretation or whole-sentence Arigidi translation still requires native-speaker review. The current tutor is a source-search assistant, not a free-form large-language-model service.
 
-## Pending items
+## Outstanding
 
-- Publish rights-cleared original Bible/Quran PDFs to public file storage and wire download links. The original files have been recovered but **were not uploaded to the public website**.
-- Original photograph and cultural audio have not been added to production.
-- Expand verified and indexed scripture data; proofread all uncertain Arigidi text with fluent speakers.
-- Build server-side generative RAG chat with citations, privacy and rate limits if a model provider is configured.
-- The existing project can be manually deployed using GitHub `gitSource`. **Automatic Vercel Git push deployment has not been confirmed.**
-
-## Language integrity
-
-Original spelling, diacritics and publication attribution must be preserved. The site must never present invented Arigidi translations as verified. Check permissions before public redistribution of original books, photographs and audio.
+- **Original image**: user provided it inline in chat, but the original bytes were not available as a standalone retrievable asset to the publishing tools. Upload through the secured Blob path and add the resulting HTTPS URL to `content/brand.json` to activate the unchanged logo and hero background.
+- **Oral-history audio**: source files are identified, but still need an upload path compatible with their large MP3 format and publishing authorization.
+- **Automated GitHub push-triggered deployment**: the existing Vercel project can be deployed from the GitHub source (verified). It is not yet an automatically connected Git project; GitHub pushes alone are not guaranteed to update production.
+- **Generative chatbot**: requires a server-side model provider with rate limiting, citation-grounded retrieval and no invented translations.
