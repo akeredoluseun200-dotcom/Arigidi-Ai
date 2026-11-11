@@ -7,7 +7,7 @@ The Kaikai Foundation digital home for Arigidi Akoko language learning, Scriptur
 **GitHub:** https://github.com/akeredoluseun200-dotcom/Arigidi-Ai  
 **Vercel project:** `kaikai-foundation-arigidi`
 
-## Version 2.3 — Complete scripture reading room
+## Version 2.4 — Faster scripture reading and animated experience
 
 The new source materials are the user's authenticated Google Drive folder:
 https://drive.google.com/drive/folders/1g75VvHxmHH2EFr9j59CVGHL9PUN--KIg
@@ -15,6 +15,8 @@ https://drive.google.com/drive/folders/1g75VvHxmHH2EFr9j59CVGHL9PUN--KIg
 - **The Holy Bible, Arigidi Akoko, 2ND EDITION** — complete 2,186-page PDF, 66 books and 1,189 source-linked chapters.
 - **Kuran Arigidi Akoko** — complete 1,649-page PDF, 114 surahs, with source-linked reading pages. No edition label.
 - **Portrait of Baba Kaikai** — the exact original photo used for the site identity/favicon and homepage, recovered from the Foundation Bible PDF without regenerating it. Its SHA256 is `d294ef044377695595daef23520ae9ab94a78c9927e94219e44a92b2669753dd`.
+- **Faster book access:** original manuscript pages are preserved in 66 smaller Bible-book PDFs and 114 smaller Kuran-surah PDFs (180 total), hosted in public Vercel Blob. Switching books no longer loads the full 18.7 MB Bible or 41 MB Kuran. The complete original files remain linked.
+- **Motion and navigation:** swipe-up scroll reveals, slide-in page transitions, reduced-motion accessibility, mobile overflow fix, and the portrait/logo navigates to Discover.
 - The reading room is a fully responsive PDF navigator with searchable Bible books and Quran surahs, chapter controls, previous/next, zoom, direct PDF access, and same-device reading progress.
 - Complete PDF source files are hosted on the connected public Vercel Blob store. GitHub contains versioned code and publication URLs, not the large original books.
 - Homepage refreshed with **Midnight Ink** (`#172e37`), **Pearl** (`#f7f5ef`) and **Coastal Sage** (`#9dbfb4`). No pink accents. Typography uses Fraunces and Nunito Sans, with subtle reduced-motion-compatible animations.
@@ -33,6 +35,8 @@ https://drive.google.com/drive/folders/1g75VvHxmHH2EFr9j59CVGHL9PUN--KIg
 - `pages/reader.html`, `assets/reader.js`, `assets/reader.css`: interactive source PDF reading room.
 - `assets/v23.css`: new responsive visual design and typography.
 - `assets/site-enhancements.js`: logo, hero portrait, navigation, source library links and homepage heritage feature.
+- `content/quick-index.z64`: file-to-chapter mapping for all 180 lightweight original-page PDF readers.
+- `assets/v24-motion.css` and `assets/motion.js`: swipe-up reveals, slide-in transitions and accessible animation controls.
 - `content/reader-index.z64`: compressed TOC extracted from the actual Drive PDFs.
 - `content/library.json` and `content/brand.json`: canonical content and brand assets.
 - `content/scripture-index.01.b64`, `content/scripture-index.02.b64`: source excerpts for the older reference-search tutor.
