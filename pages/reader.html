@@ -14,6 +14,7 @@
 <div class="reading-shell">
 <aside class="book-rail" aria-label="Choose sacred text">
 <div class="rail-top"><p class="small-caps">SELECT A COLLECTION</p><div class="collection-tabs" role="group" aria-label="Book collection"><button id="tab-bible" class="selected" type="button" aria-pressed="true">The Bible <small>2ND EDITION</small></button><button id="tab-quran" type="button" aria-pressed="false">The Kuran <small>ARIGIDI AKOKO</small></button></div></div>
+<div class="mobile-book-picker"><label for="mobile-book-select">Choose a book or surah</label><select id="mobile-book-select" aria-label="Choose Bible book or Kuran surah"><option>Loading books…</option></select></div>
 <div class="rail-search"><label for="library-search">Find a book or surah</label><input id="library-search" type="search" placeholder="Search the collection…" autocomplete="off"></div>
 <div class="rail-count" id="rail-count" aria-live="polite">Loading collection…</div>
 <div class="book-list" id="book-list" role="list"></div>
@@ -22,10 +23,15 @@
 <div class="reader-main"><div class="reader-topline"><div><span class="eyebrow" id="edition-label">KAIKAI BIBLE · 2ND EDITION</span><h3 id="selected-title">Choose your reading</h3><p id="reading-description">Select a book or a surah to begin.</p></div><a id="full-book-link" class="open-original" href="#" target="_blank" rel="noopener noreferrer">Open full PDF <span aria-hidden="true">↗</span></a></div>
 <div class="chapter-area"><div class="chapter-title"><strong id="chapter-heading">Chapters</strong><span id="chapter-count"></span></div><div class="chapter-list" id="chapter-list" aria-label="Select a chapter or surah"></div></div>
 <div class="reader-toolbar"><div class="reading-location"><span class="reading-dot"></span><span id="reading-location">Ready to read</span></div><div class="reader-controls"><button id="prev-chapter" type="button" aria-label="Previous chapter" title="Previous chapter">←</button><button id="next-chapter" type="button" aria-label="Next chapter" title="Next chapter">→</button><span class="control-divider"></span><button id="zoom-out" type="button" aria-label="Reduce document zoom" title="Zoom out">A−</button><output id="zoom-value" aria-live="polite">110%</output><button id="zoom-in" type="button" aria-label="Increase document zoom" title="Zoom in">A+</button></div></div>
-<div class="pdf-stage"><iframe id="reader-pdf" title="Original Arigidi scripture reader" loading="lazy"></iframe><div class="reader-help">If the PDF does not display on your device, choose <strong>Open full PDF</strong> above.</div></div>
+<div class="pdf-stage"><div id="mobile-pdf-viewer" class="mobile-pdf-viewer" aria-label="Mobile-friendly Scripture page" hidden>
+ <div class="mobile-document-header"><span class="mobile-doc-label">ORIGINAL TEXT · EASY READ</span><span id="mobile-pdf-location">Ready to read</span></div>
+ <div class="mobile-pdf-canvas-wrap"><canvas id="mobile-pdf-canvas" role="img" aria-label="Original Bible or Kuran page"></canvas><div id="mobile-pdf-message" class="mobile-pdf-message" role="status">Preparing your page…</div></div>
+ <div class="mobile-page-controls"><button id="mobile-pdf-prev" type="button" aria-label="Previous PDF page">← Previous page</button><span id="mobile-pdf-count" aria-live="polite">Page 1</span><button id="mobile-pdf-next" type="button" aria-label="Next PDF page">Next page →</button></div>
+ <p class="mobile-pdf-hint">Swipe left or right to change pages. For the entire publication, use <strong>Open full PDF</strong> above.</p>
+ </div><iframe id="reader-pdf" title="Original Arigidi scripture reader" loading="lazy"></iframe><div class="reader-help">If the document cannot be displayed on your device, choose <strong>Open full PDF</strong> above.</div></div>
 <div class="reader-footnote"><span class="footnote-mark" aria-hidden="true">✳</span><p>The text shown in this reader comes from the Foundation's original PDF, not a newly generated translation. Where wording needs proofreading, the manuscript remains the authority.</p></div>
 </div></div></section>
 <section class="closing"><div><span class="eyebrow">A LANGUAGE WORTH KEEPING</span><h2>Every word remembered<br><em>is a story kept alive.</em></h2><p>Learning Arigidi connects us to the people who spoke it before us, and the generations who will speak it after us.</p><a href="/#learn">Return to the learning academy <span aria-hidden="true">↗</span></a></div></section>
 <footer><span>© KAIKAI FOUNDATION</span><span>ARIGIDI AKOKO · NIGERIA</span><a href="/">Back to KAIKAI</a></footer>
-<script src="/assets/reader.js" defer></script>
+<script src="/assets/reader.js" defer></script><script type="module" src="/assets/mobile-pdf.js"></script>
 </body></html>
