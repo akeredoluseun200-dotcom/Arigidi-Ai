@@ -1,0 +1,11 @@
+{
+  "name": "kaikai-arigidi-experience",
+  "version": "2.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "restore-source": "node scripts/restore.mjs"
+  },
+  "description": "Kaikai Foundation Arigidi language academy and source-grounded tutor"
+}
