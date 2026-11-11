@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const root=process.cwd();
 const archive=fs.readFileSync(path.join(root,'source/index.html.gz.b64'),'utf8').trim();
-const html=zlib.gunzipSync(Buffer.from(archive,'base64')).toString('utf8');
+const html=zlib.gunzipSync(Buffer.from(archive,'base64')).toString('utf8').replace('<div class="brand">KAIKAI<span>FOUNDATION</span></div>','<a class="brand" href="#home" data-go="home" aria-label="Return to Discover">KAIKAI<span>FOUNDATION</span></a>');
 if(!html.includes('id="dictionary"')||!html.includes('id="tutor"')||!html.includes('id="library"'))throw Error('Core learning pages missing');
 
 const photo='https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/Baba-Kaikai.jpeg';
@@ -13,14 +13,15 @@ const branding='<link rel="icon" type="image/jpeg" href="'+photo+'"><meta proper
 let enhanced=html.replace(
  'Here are original-source passages connected to your question.',
  'These are short recorded excerpts. Read the original Bible or Kuran for the complete passage. We do not invent Arigidi translations.'
-).replace('</head>',fonts+branding+'<link rel="stylesheet" href="/assets/brand-refresh.css"><link rel="stylesheet" href="/assets/v23.css"></head>')
-.replace('</body>','<script defer src="/assets/site-enhancements.js"></script></body>');
+).replace('</head>',fonts+branding+'<link rel="stylesheet" href="/assets/brand-refresh.css"><link rel="stylesheet" href="/assets/v23.css"><link rel="stylesheet" href="/assets/v24-motion.css"></head>')
+.replace('</body>','<script defer src="/assets/site-enhancements.js"></script><script defer src="/assets/motion.js"></script></body>');
 
 fs.mkdirSync('dist/content',{recursive:true});
 fs.mkdirSync('dist/assets',{recursive:true});
 fs.writeFileSync('dist/index.html',enhanced);
-fs.copyFileSync('pages/reader.html','dist/reader.html');
-for(const name of ['brand-refresh.css','v23.css','site-enhancements.js','reader.css','reader.js']){
+const readerHtml=fs.readFileSync('pages/reader.html','utf8').replace('</head>','<link rel="stylesheet" href="/assets/v24-motion.css"></head>');
+fs.writeFileSync('dist/reader.html',readerHtml);
+for(const name of ['brand-refresh.css','v23.css','site-enhancements.js','reader.css','reader.js','v24-motion.css','motion.js']){
  fs.copyFileSync('assets/'+name,'dist/assets/'+name);
 }
 for(const name of ['brand.json','library.json']){
