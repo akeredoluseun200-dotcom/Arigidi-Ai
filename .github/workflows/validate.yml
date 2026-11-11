@@ -35,6 +35,7 @@ jobs:
           const library=JSON.parse(fs.readFileSync('dist/content/library.json','utf8'));
           const reader=JSON.parse(fs.readFileSync('dist/content/reader-index.json','utf8'));
           const brand=JSON.parse(fs.readFileSync('dist/content/brand.json','utf8'));
+          const quick=JSON.parse(fs.readFileSync('dist/content/quick-index.json','utf8'));
           for(const id of ['dictionary','learn','practice','heritage','library','tutor'])if(!html.includes('id="'+id+'"'))throw Error('Missing '+id+' page');
           if(!page.includes('id="reader-pdf"'))throw Error('Missing actual scripture reader');
           if(scriptures.length<1200)throw Error('Missing indexed references');
@@ -42,6 +43,9 @@ jobs:
           if(reader.bible.length!==66||reader.quran.length!==114)throw Error('Incorrect original document table of contents');
           if(reader.bible.reduce((count,b)=>count+b.chapters.length,0)!==1189)throw Error('Missing Bible chapter targets');
           if(!brand.logoUrl.includes('Baba-Kaikai.jpeg'))throw Error('Original photograph missing');
+          if(quick.bible.length!==66||quick.quran.length!==114)throw Error('Incomplete fast reader');
+          if(!html.includes('aria-label="Return to Discover"'))throw Error('Logo home navigation missing');
+          if(!fs.existsSync('dist/assets/v24-motion.css')||!fs.existsSync('dist/assets/motion.js'))throw Error('Motion resources missing');
           if(!fs.existsSync('dist/assets/v23.css')||!fs.existsSync('dist/assets/reader.css'))throw Error('Missing design assets');
           console.log('All Kaikai checks passed — 66 Bible books, 1,189 chapters, 114 surahs,',scriptures.length,'source-indexed excerpts');
           NODE
