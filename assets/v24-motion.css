@@ -1,0 +1,25 @@
+/* Kaikai v2.4 — purposeful motion, readable navigation, quick-reader loading */
+a.brand{text-decoration:none!important;display:inline-flex;align-items:center;gap:12px;cursor:pointer;background:none;border:0}
+a.brand:hover img{transform:scale(1.06);box-shadow:0 0 0 5px rgba(157,191,180,.22)}
+a.brand img{transition:transform .32s ease,box-shadow .32s ease}
+a.brand:focus-visible{outline:3px solid #438987;outline-offset:7px;border-radius:9px}
+.page.active{display:block}
+#home .hero .inner{will-change:auto}
+@media (prefers-reduced-motion:no-preference){
+ .page.active{animation:kaikai-page-enter .55s cubic-bezier(.19,1,.22,1) both}
+ @keyframes kaikai-page-enter{from{opacity:.45;transform:translate3d(28px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+ .kaikai-reveal{opacity:0;transform:translate3d(0,35px,0);filter:blur(3px);transition:opacity .72s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1),filter .65s ease;transition-delay:var(--reveal-delay,0ms)}
+ .kaikai-reveal.kaikai-inview{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}
+ .kaikai-reveal.slide-left{transform:translate3d(-35px,0,0)}
+ .kaikai-reveal.slide-right{transform:translate3d(35px,0,0)}
+ .kaikai-reveal.slide-left.kaikai-inview,.kaikai-reveal.slide-right.kaikai-inview{transform:translate3d(0,0,0)}
+ .reader-main{animation:kaikai-reader-enter .5s cubic-bezier(.2,.8,.2,1) both}
+ @keyframes kaikai-reader-enter{from{opacity:.4;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+ .reader-section .book-list .book-button.active{animation:kaikai-selected .25s ease both}
+ @keyframes kaikai-selected{from{transform:translateX(-7px);opacity:.5}to{transform:none;opacity:1}}
+}
+.pdf-stage{position:relative}
+.pdf-stage.pdf-loading:before{content:"Opening this lighter edition…";position:absolute;z-index:2;top:25px;left:50%;transform:translateX(-50%);background:#172e37;color:#fff;font:800 13px/1.3 "Nunito Sans",sans-serif;white-space:nowrap;border-radius:100px;box-shadow:0 8px 22px #0002;padding:14px 23px;pointer-events:none}
+.pdf-stage.pdf-loading:after{content:"";position:absolute;z-index:2;top:64px;left:calc(50% - 14px);width:28px;height:28px;border:3px solid #d5e4db;border-top-color:#2a686c;border-radius:50%;animation:kaikai-spin .8s linear infinite;pointer-events:none}
+@keyframes kaikai-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.page.active,.kaikai-reveal,.kaikai-reveal.kaikai-inview,.reader-main{animation:none!important;transition:none!important;transform:none!important;filter:none!important;opacity:1!important}.pdf-stage.pdf-loading:after{animation:none!important}.brand img{transition:none!important}}
