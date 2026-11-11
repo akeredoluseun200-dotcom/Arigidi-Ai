@@ -7,6 +7,7 @@ const PDF={
 const $=s=>document.querySelector(s);
 const els={bible:$('#tab-bible'),quran:$('#tab-quran'),search:$('#library-search'),count:$('#rail-count'),list:$('#book-list'),title:$('#selected-title'),description:$('#reading-description'),chapters:$('#chapter-list'),chapterTitle:$('#chapter-heading'),chapterCount:$('#chapter-count'),edition:$('#edition-label'),location:$('#reading-location'),frame:$('#reader-pdf'),full:$('#full-book-link'),prev:$('#prev-chapter'),next:$('#next-chapter'),zin:$('#zoom-in'),zout:$('#zoom-out'),zlabel:$('#zoom-value')};
 const state={type:'bible',item:0,chapter:0,zoom:110,index:null};
+const requestedCollection=new URLSearchParams(window.location.search).get('collection');
 let saved=null;
 try{saved=JSON.parse(localStorage.getItem('kaikai-reader-progress-v1')||'null')}catch(_){}
 const persist=()=>{try{localStorage.setItem('kaikai-reader-progress-v1',JSON.stringify({type:state.type,item:state.item,chapter:state.chapter,zoom:state.zoom}))}catch(_){}};
@@ -96,6 +97,7 @@ fetch('/content/reader-index.json').then(r=>{if(!r.ok)throw new Error('Catalogue
   state.chapter=Math.min(Math.max(Number(saved.chapter)||0,0),chapterCount()-1);
   state.zoom=Math.min(Math.max(Number(saved.zoom)||110,70),170);
  }
+ if(requestedCollection==='bible'||requestedCollection==='quran'){state.type=requestedCollection;state.item=0;state.chapter=0}
  render();
 }).catch(()=>{
  els.count.textContent='Catalogue temporarily unavailable';
