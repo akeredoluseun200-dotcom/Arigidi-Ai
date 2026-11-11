@@ -1,0 +1,160 @@
+/* KAIKAI Version 2.5 — Mobile is a first-class reading and learning experience. */
+:root{--kk-ink:#172e37;--kk-mist:#e3ede8;--kk-cream:#f8f6f0;--kk-sage:#a9ccbf;--kk-border:#dce5e0}
+.kaikai-mobile-menu,.kaikai-mobile-nav,.mobile-book-picker,.mobile-pdf-viewer{display:none}
+.kaikai-mobile-menu button,.kaikai-mobile-nav button{font-family:"Nunito Sans",sans-serif}
+.mobile-pdf-viewer[hidden]{display:none!important}
+@media(max-width:760px){
+ html{scroll-padding-top:78px;scroll-behavior:smooth}
+ html,body{width:100%;max-width:100%;overflow-x:clip}
+ body{font-size:16px!important;line-height:1.6!important;padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;background:var(--kk-cream)!important}
+ button,input,select{font-size:16px;touch-action:manipulation}
+ a,button{-webkit-tap-highlight-color:transparent}
+ header{position:sticky!important;top:0;z-index:90;background:#faf9f6f5!important;border-bottom:1px solid #e0e7e1;backdrop-filter:blur(16px)}
+ .nav{padding:11px 18px!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;min-height:66px!important;gap:8px!important}
+ .brand{display:inline-flex!important;gap:9px!important;align-items:center!important;flex:0 1 auto;min-width:0;font-size:25px!important}
+ .brand span{font-size:8px!important;letter-spacing:.12em!important}
+ .kaikai-brand-lockup img{height:42px!important;width:42px!important;border-width:2px!important;flex-shrink:0}
+ .navlinks{display:none!important}
+ .kaikai-mobile-menu{display:block;position:relative;flex:none}
+ .kaikai-menu-toggle{background:var(--kk-ink);color:#f9f8f4;border:0;border-radius:11px;min-height:43px;padding:0 17px;font-size:13px!important;font-weight:900;letter-spacing:.01em}
+ .kaikai-menu-toggle:after{content:"  ☰";margin-left:7px}
+ .kaikai-menu-panel{position:absolute;z-index:120;right:0;top:calc(100% + 11px);width:min(290px,calc(100vw - 36px));background:#fffefa;border:1px solid var(--kk-border);box-shadow:0 20px 45px #172e3727;border-radius:15px;padding:9px;display:grid;gap:3px}
+ .kaikai-menu-panel[hidden]{display:none}
+ .kaikai-menu-panel button,.kaikai-menu-panel a{display:block;text-align:left;color:var(--kk-ink);text-decoration:none;border:0;background:transparent;border-radius:9px;padding:13px 14px;font-size:14px;font-weight:850;width:100%}
+ .kaikai-menu-panel button:hover,.kaikai-menu-panel a:hover{background:var(--kk-mist)}
+ .kaikai-mobile-nav{position:fixed;bottom:0;left:0;right:0;z-index:110;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;align-items:stretch;padding:9px 10px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid #d6e2db;background:#fbfaf7f5;backdrop-filter:blur(20px);box-shadow:0 -10px 38px #172e3710}
+ .kaikai-mobile-link{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:0;padding:7px 2px!important;background:transparent;color:#5b7071;border:0;border-radius:10px;text-decoration:none;font-size:12px!important;font-weight:900;white-space:nowrap;letter-spacing:-.01em}
+ .kaikai-mobile-link.current{background:#dfede5;color:#184955}
+ .kaikai-mobile-link:active{transform:scale(.97)}
+ #home .hero{min-height:0!important;display:flex!important;align-items:flex-end!important;background-color:#172e37!important}
+ #home .hero .inner{padding:255px 22px 48px!important;width:100%;max-width:100%!important}
+ #home .hero::before{background:linear-gradient(0deg,#172e37 0%,#172e37f4 41%,#172e3794 73%,#172e370a 100%)!important}
+ #home .hero h1{font-size:clamp(3.2rem,10.7vw,4.6rem)!important;line-height:1.04!important;letter-spacing:-.06em!important;margin:16px 0!important}
+ #home .hero p{font-size:17px!important;line-height:1.53!important;max-width:34ch!important}
+ #home .hero .eyebrow{font-size:10px!important;letter-spacing:.14em!important}
+ #home .hero-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
+ #home .hero-actions button{font-size:12px!important;padding:13px 9px!important;min-height:48px!important}
+ #home .hero-actions .kaikai-footer-cta{grid-column:1/-1;text-align:center;justify-content:center;font-size:14px!important;padding:14px!important}
+ #home .stats{grid-template-columns:1fr 1fr!important;margin:0 13px!important;border-radius:0 0 14px 14px!important}
+ #home .stat{padding:19px 16px!important}
+ #home .stat strong{font-size:2.4rem!important}
+ #home .stat small{font-size:9px!important;letter-spacing:.05em!important}
+ .wrap{padding-left:18px!important;padding-right:18px!important;padding-bottom:65px!important}
+ .section{padding:65px 0!important}
+ .section h2,.pageHead h2{font-size:clamp(2.6rem,9vw,4rem)!important;line-height:1.13!important}
+ .pageHead{padding-top:46px!important}
+ .pageHead .desc,.section .desc{font-size:16px!important;line-height:1.68!important}
+ .cards{display:grid!important;grid-template-columns:1fr!important;gap:14px!important}
+ .cards .card{min-height:220px!important;padding:27px!important;border-radius:16px!important}
+ .cards .card h3{font-size:2rem!important}
+ .feature{display:block!important;border-radius:16px!important}
+ .feature .left,.feature .right{padding:28px!important}
+ .quote,.heritageCard{padding:25px!important}
+ .quote h3{font-size:clamp(2rem,8vw,3.1rem)!important}
+ .library-teaser{margin:30px 0!important;border-radius:16px!important}
+ .library-teaser-content{padding:27px!important}
+ .library-teaser h3{font-size:clamp(2.45rem,8.4vw,3.5rem)!important}
+ .library-teaser-numbers strong{font-size:4.1rem!important}
+ .lessonGrid,.heritageGrid,.libraryGrid{grid-template-columns:1fr!important;gap:14px!important}
+ .libraryGrid .book{padding:27px!important}
+ .libraryGrid .book h3{font-size:clamp(2.2rem,9vw,3.4rem)!important}
+ .library-actions{display:grid!important;grid-template-columns:1fr!important}
+ .library-actions a{width:100%!important;justify-content:center!important;text-align:center!important}
+ .toolbar,.arena{padding:18px!important}
+ #dictionary .toolbar{display:flex!important;flex-direction:column!important;gap:12px!important}
+ #dictionary input{width:100%!important}
+ #tutor .kt-head{padding:25px!important}
+ #tutor .kt-head h3{font-size:clamp(2.4rem,9vw,3.6rem)!important}
+ #tutor .kt-controls{display:flex!important;flex-direction:column!important;gap:11px!important}
+ #tutor .kt-feed{padding:14px!important}
+ #tutor .kt-msg{max-width:96%!important}
+ /* Reader: a focused single-column phone experience. */
+ .site-header{position:sticky;top:0;height:auto;min-height:64px;padding:10px 17px!important;display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap!important;gap:8px}
+ .site-header .identity{flex:none;gap:10px}
+ .site-header .identity img{width:41px;height:41px}
+ .site-header .identity strong{font-size:24px}
+ .site-header .identity small{font-size:8px;letter-spacing:.10em}
+ .site-header nav{flex:none!important;display:flex;justify-content:end;gap:0;width:auto!important;overflow:visible!important}
+ .site-header nav a{display:none}
+ .site-header nav a.nav-current{display:inline-flex;padding:10px 12px;background:#e1efe7;color:#1a5055;border:0;border-radius:9px;font-size:11px}
+ .intro{overflow:hidden}
+ .intro:before{width:380px;height:380px;right:-270px;top:-140px}
+ .intro-inner{display:block;min-height:0;padding:39px 20px 33px}
+ .intro-copy .eyebrow{font-size:10px;letter-spacing:.11em}
+ .intro h1{font-size:clamp(2.85rem,10.1vw,4.35rem);line-height:1.06;margin:14px 0!important;letter-spacing:-.055em}
+ .intro-copy>p{font-size:15px;line-height:1.56;max-width:38ch;margin-bottom:15px}
+ .intro-actions{margin-top:19px;gap:18px}
+ .intro-actions .primary-link{padding:12px 17px;font-size:13px}
+ .intro-actions .text-link{font-size:13px}
+ .portrait-frame{display:none!important}
+ .intro-bottom{display:none}
+ .reader-section{padding:39px 10px 75px;scroll-margin-top:65px}
+ .section-heading{padding:0 10px;margin-bottom:21px}
+ .section-heading .eyebrow{font-size:10px}
+ .section-heading h2{font-size:clamp(2.35rem,8.1vw,3.35rem);line-height:1.08;margin:9px 0 13px}
+ .section-heading p{font-size:14px;line-height:1.55;margin:0}
+ .reading-shell{display:block;border-radius:16px;min-height:0;border:1px solid #dce5dd;overflow:visible;box-shadow:0 10px 38px #172e370e}
+ .book-rail{display:block;background:#eef4ee;border-radius:15px 15px 0 0;border-bottom:1px solid #d3e2d8}
+ .rail-top{padding:17px 16px 13px}
+ .small-caps{font-size:9px;margin:0 0 9px}
+ .collection-tabs{padding:5px;gap:5px;background:#dce8df}
+ .collection-tabs button{font-size:14px;min-height:50px;padding:8px 5px}
+ .collection-tabs button small{font-size:8px}
+ .mobile-book-picker{display:block;padding:0 16px 17px}
+ .mobile-book-picker label{display:block;color:#4f6769;font-size:12px;font-weight:900;margin:0 0 7px}
+ .mobile-book-picker select{width:100%;height:50px;border:1px solid #c1d7cc;border-radius:11px;padding:0 35px 0 14px;background:#fffefa;color:#193b42;font-weight:850;box-shadow:0 3px 10px #1a363b0a;appearance:auto}
+ .rail-search,.rail-count,.book-list,.rail-footer{display:none!important}
+ .reader-main{width:100%;min-width:0;border-radius:0 0 15px 15px;overflow:hidden}
+ .reader-topline{display:block;padding:22px 18px 17px;border-bottom:1px solid #e0e8e2}
+ .reader-topline .eyebrow{font-size:10px;letter-spacing:.11em}
+ .reader-topline h3{font-size:clamp(2.2rem,9vw,3.1rem);line-height:1.1;margin:9px 0}
+ .reader-topline p{font-size:13px;line-height:1.5}
+ .open-original{display:inline-flex;margin-top:13px;padding:11px 15px;min-height:43px;font-size:12px;border-radius:9px;background:#e8f2ea}
+ .chapter-area{padding:16px 18px 17px}
+ .chapter-title{font-size:13px;margin:0 0 12px}
+ .chapter-list{display:flex!important;flex-wrap:nowrap!important;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;max-height:none!important;padding-bottom:5px;scrollbar-width:thin}
+ .chapter-list button{min-width:47px;min-height:45px;padding:7px 12px;font-size:15px;scroll-snap-align:start;border-radius:10px}
+ .reader-toolbar{position:sticky;top:63px;z-index:35;display:flex;flex-wrap:wrap;gap:11px;background:#f7fbf8;border-bottom:1px solid #dce5dd;padding:13px 15px;box-shadow:0 6px 18px #172e3708}
+ .reading-location{width:100%;font-size:13px;line-height:1.3}
+ .reader-controls{width:100%;display:grid;grid-template-columns:45px 45px 1fr 42px 44px 42px;gap:6px;align-items:center}
+ .reader-controls button{width:100%;height:43px;font-size:16px;border-radius:10px}
+ .reader-controls .control-divider{justify-self:center;margin:0;background:#dce5df}
+ .reader-controls output{width:auto;font-size:12px}
+ .pdf-stage{background:#f3f6f2;min-height:390px}
+ #reader-pdf{display:none!important}
+ .mobile-pdf-viewer:not([hidden]){display:block;background:#f8faf6}
+ .mobile-document-header{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:13px 17px;background:#e6efe8;color:#416668;border-bottom:1px solid #d4e3d8}
+ .mobile-doc-label{font-size:9px;font-weight:900;letter-spacing:.12em}
+ #mobile-pdf-location{font-size:10px;font-weight:900}
+ .mobile-pdf-canvas-wrap{position:relative;padding:12px 8px 16px;min-height:360px;overflow-x:auto;text-align:center}
+ .mobile-pdf-canvas-wrap canvas{display:block;margin:0 auto;max-width:none;background:#fff;border:1px solid #e3e6e0;box-shadow:0 4px 18px #233f4418;opacity:0;transition:opacity .22s ease}
+ .mobile-pdf-canvas-wrap canvas.is-visible{opacity:1}
+ .mobile-pdf-message{position:absolute;z-index:4;top:33px;left:50%;transform:translateX(-50%);background:#17363e;color:#f8f9f4;padding:12px 15px;border-radius:999px;font-size:12px;font-weight:900;max-width:calc(100% - 22px);width:max-content;line-height:1.3;box-shadow:0 10px 25px #172e3720}
+ .mobile-pdf-message[hidden]{display:none}
+ .mobile-page-controls{display:grid;grid-template-columns:1fr auto 1fr;gap:9px;align-items:center;padding:14px 12px;background:#fffefa;border-top:1px solid #dce6e0}
+ .mobile-page-controls button{min-height:47px;padding:9px 7px;border:1px solid #c7dbcf;background:#eaf4ed;color:#1d5158;font-size:12px;font-weight:900;border-radius:10px}
+ .mobile-page-controls button:disabled{opacity:.35}
+ .mobile-page-controls span{white-space:nowrap;font-size:11px;font-weight:900;color:#526d70;text-align:center}
+ .mobile-pdf-hint{margin:0;padding:0 14px 18px;color:#617477;font-size:12px;line-height:1.6;text-align:center}
+ .reader-help{padding:12px 16px;font-size:11px}
+ .reader-footnote{padding:17px;gap:9px}
+ .reader-footnote p{font-size:11px;line-height:1.6}
+ .closing{padding:65px 20px}
+ .closing h2{font-size:clamp(2.6rem,9vw,4rem)}
+ .closing p{font-size:16px}
+ footer{padding:24px 18px 100px;gap:10px}
+ /* A calm entrance that never hides the content too long. */
+ @media(prefers-reduced-motion:no-preference){
+  .page.active{animation:kk-mobile-enter .28s ease-out both!important}
+  @keyframes kk-mobile-enter{from{opacity:.88;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .kaikai-reveal{filter:none!important;transform:translateY(12px)!important;transition:opacity .38s ease,transform .38s ease!important;transition-delay:0ms!important}
+  .kaikai-reveal.kaikai-inview{transform:none!important}
+  .reader-main{animation:none!important}
+ }
+}
+@media(max-width:360px){
+ .reader-controls{grid-template-columns:40px 40px 1fr 39px 39px 39px;gap:4px}
+ .mobile-page-controls{gap:5px}
+ .mobile-page-controls button{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){.mobile-pdf-canvas-wrap canvas{transition:none!important}}
