@@ -8,7 +8,7 @@ const next=document.getElementById('mobile-pdf-next');
 const count=document.getElementById('mobile-pdf-count');
 const locationText=document.getElementById('mobile-pdf-location');
 const mobile=window.matchMedia('(max-width: 760px)');
-let pdfjs=null, pdf=null, docURL='',pageNo=1,zoom=110,requestVersion=0,renderTask=null,rendering=false;
+let pdfjs=null, pdf=null, docURL='',pageNo=1,zoom=110,requestVersion=0,renderTask=null,rendering=false,renderPending=false;
 const cache=new Map();
 function status(text){message.textContent=text;message.hidden=!text;}
 function active(){return mobile.matches;}
@@ -33,7 +33,8 @@ async function getPDF(url){
  return result;
 }
 async function paint(){
- if(!active()||!pdf||rendering)return;
+ if(!active()||!pdf)return;
+ if(rendering){renderPending=true;return;}
  rendering=true;
  const version=++requestVersion;
  status('Rendering the original page…');
@@ -61,7 +62,7 @@ async function paint(){
    status('The page could not be rendered. Use Open full PDF above.');
    console.warn('Kaikai mobile PDF fallback:',e);
   }
- }finally{renderTask=null;rendering=false;updateControls();}
+ }finally{renderTask=null;rendering=false;updateControls();if(renderPending){renderPending=false;paint();}}
 }
 async function show(detail){
  if(!active())return;
@@ -102,7 +103,7 @@ canvas.parentElement.addEventListener('touchend',e=>{if(!touchX||e.changedTouche
 window.addEventListener('kaikai:readerchange',e=>show(e.detail));
 window.addEventListener('resize',()=>{if(mobile.matches&&pdf&&!rendering)paint();});
 mobile.addEventListener?.('change',e=>{
- if(!e.matches){root.hidden=true;pdf=null;docURL='';}
+ if(!e.matches){root.hidden=true;pdf=null;docURL='';const frame=document.getElementById('reader-pdf');if(frame&&window.__kaikaiReaderCurrent)frame.src=window.__kaikaiReaderCurrent.url;}
  else if(window.__kaikaiReaderCurrent)show(window.__kaikaiReaderCurrent);
 });
 if(active()&&window.__kaikaiReaderCurrent)show(window.__kaikaiReaderCurrent);
