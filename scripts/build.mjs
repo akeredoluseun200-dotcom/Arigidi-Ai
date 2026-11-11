@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import zlib from 'node:zlib';
+import path from 'node:path';
+const root=process.cwd();
+const archive=fs.readFileSync(path.join(root,'source','index.html.gz.b64'),'utf8').trim();
+const html=zlib.gunzipSync(Buffer.from(archive,'base64')).toString('utf8');
+if(!html.includes('id="dictionary"')||!html.includes('id="tutor"'))throw new Error('Site source missing required pages');
+fs.mkdirSync('dist/content',{recursive:true});
+fs.writeFileSync('dist/index.html',html);
+fs.copyFileSync('content/scriptures.json','dist/content/scriptures.json');
+fs.writeFileSync('dist/robots.txt','User-agent: *\\nAllow: /\\n');
+console.log('Built Kaikai experience: '+html.length+' characters');
