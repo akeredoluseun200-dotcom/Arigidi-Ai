@@ -37,6 +37,7 @@ function syncFrame(){
  window.__kaikaiReaderCurrent=payload;
  window.dispatchEvent(new CustomEvent('kaikai:readerchange',{detail:payload}));
  els.description.textContent+=(quick?' · Fast-loading original pages':' · Complete original PDF');
+ if(state.type==='bible'&&x.name==='Genesis'&&chapter>=5&&chapter<=10)els.description.textContent+=' · Noah (English spelling)';
  els.zlabel.textContent=state.zoom+'%';
  const atStart=state.item===0&&state.chapter===0;
  const atEnd=state.item===items().length-1&&state.chapter===chapterCount()-1;
