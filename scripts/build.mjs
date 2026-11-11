@@ -6,12 +6,13 @@ const archive=fs.readFileSync(path.join(root,'source','index.html.gz.b64'),'utf8
 const html=zlib.gunzipSync(Buffer.from(archive,'base64')).toString('utf8');
 if(!html.includes('id="dictionary"')||!html.includes('id="tutor"'))throw new Error('Site source missing required pages');
 fs.mkdirSync('dist/content',{recursive:true});
-let enhanced=html.replace('</head>','<link rel="stylesheet" href="/assets/brand-refresh.css"></head>').replace('</body>','<script defer src="/assets/site-enhancements.js"></script></body>');
+let enhanced=html.replace('Here are original-source passages connected to your question.','These are short, source-matched excerpts, not necessarily complete verses. Follow the book reference to read the passage in context.').replace('</head>','<link rel="stylesheet" href="/assets/brand-refresh.css"></head>').replace('</body>','<script defer src="/assets/site-enhancements.js"></script></body>');
 fs.writeFileSync('dist/index.html',enhanced);
 fs.mkdirSync('dist/assets',{recursive:true});
 fs.copyFileSync('assets/brand-refresh.css','dist/assets/brand-refresh.css');
 fs.copyFileSync('assets/site-enhancements.js','dist/assets/site-enhancements.js');
 if(fs.existsSync('content/library.json'))fs.copyFileSync('content/library.json','dist/content/library.json');
+if(fs.existsSync('content/brand.json'))fs.copyFileSync('content/brand.json','dist/content/brand.json');
 const parts=['content/scripture-index.01.b64','content/scripture-index.02.b64'];
 const decoded=zlib.gunzipSync(Buffer.from(parts.map(p=>fs.readFileSync(p,'utf8').trim()).join(''),'base64'));
 const excerpts=JSON.parse(decoded.toString('utf8'));
