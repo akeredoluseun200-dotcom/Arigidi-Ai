@@ -27,6 +27,8 @@ jobs:
         run: |
           node --check dist/assets/reader.js
           node --check dist/assets/site-enhancements.js
+          node --check dist/assets/mobile-ui.js
+          node --check dist/assets/motion.js
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const html=fs.readFileSync('dist/index.html','utf8');
@@ -46,6 +48,10 @@ jobs:
           if(quick.bible.length!==66||quick.quran.length!==114)throw Error('Incomplete fast reader');
           if(!html.includes('aria-label="Return to Discover"'))throw Error('Logo home navigation missing');
           if(!fs.existsSync('dist/assets/v24-motion.css')||!fs.existsSync('dist/assets/motion.js'))throw Error('Motion resources missing');
+          if(!fs.existsSync('dist/assets/mobile-v25.css')||!fs.existsSync('dist/assets/mobile-ui.js')||!fs.existsSync('dist/assets/mobile-pdf.js'))throw Error('Mobile reader files missing');
+          const mobileReader=fs.readFileSync('dist/reader.html','utf8');
+          if(!mobileReader.includes('id="mobile-book-select"')||!mobileReader.includes('id="mobile-pdf-canvas"'))throw Error('Mobile Scripture reader incomplete');
+          if(!fs.readFileSync('dist/assets/reader.js','utf8').includes('kaikai:readerchange'))throw Error('Direct mobile page rendering disconnected');
           if(!fs.existsSync('dist/assets/v23.css')||!fs.existsSync('dist/assets/reader.css'))throw Error('Missing design assets');
           console.log('All Kaikai checks passed — 66 Bible books, 1,189 chapters, 114 surahs,',scriptures.length,'source-indexed excerpts');
           NODE
