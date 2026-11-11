@@ -8,14 +8,14 @@
   shelf.parentNode.insertBefore(intro,shelf);
   fetch('/content/library.json').then(r=>r.ok?r.json():[]).then(items=>{
    if(!Array.isArray(items))return;
+   const existing=[...shelf.querySelectorAll('article.book')];
+   for(const card of existing){const soon=card.querySelector('.soon');if(soon)soon.remove();}
    for(const book of items){
-    if(!book.url)continue;
-    const card=document.createElement('article');card.className='book';
-    const title=document.createElement('h3');title.textContent=book.title||'Publication';
-    const subtitle=document.createElement('p');subtitle.textContent=book.description||'Original-language manuscript';
-    const actions=document.createElement('div');actions.className='library-actions';
-    const link=document.createElement('a');link.href=book.url;link.rel='noopener noreferrer';link.target='_blank';link.textContent=book.action||'Read original publication';link.setAttribute('aria-label','Open '+title.textContent+' in a new tab');
-    actions.append(link);card.append(title,subtitle,actions);shelf.append(card);
+    if(!book.url||!/^https:\/\//.test(book.url))continue;
+    let card=existing.find(x=>book.category==='quran'?/quran/i.test(x.textContent):/bible/i.test(x.textContent));
+    if(!card){card=document.createElement('article');card.className='book';const title=document.createElement('h3');title.textContent=book.title||'Publication';card.append(title);shelf.append(card);}
+    let actions=card.querySelector('.library-actions');if(!actions){actions=document.createElement('div');actions.className='library-actions';card.append(actions);}
+    const link=document.createElement('a');link.href=book.url;link.rel='noopener noreferrer';link.target='_blank';link.textContent=book.action||'Read original publication';link.setAttribute('aria-label','Open '+book.title+' in a new tab');actions.append(link);
    }
   }).catch(()=>{});
  }
