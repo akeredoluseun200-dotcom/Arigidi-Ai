@@ -23,3 +23,8 @@ a.brand:focus-visible{outline:3px solid #438987;outline-offset:7px;border-radius
 .pdf-stage.pdf-loading:after{content:"";position:absolute;z-index:2;top:64px;left:calc(50% - 14px);width:28px;height:28px;border:3px solid #d5e4db;border-top-color:#2a686c;border-radius:50%;animation:kaikai-spin .8s linear infinite;pointer-events:none}
 @keyframes kaikai-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.page.active,.kaikai-reveal,.kaikai-reveal.kaikai-inview,.reader-main{animation:none!important;transition:none!important;transform:none!important;filter:none!important;opacity:1!important}.pdf-stage.pdf-loading:after{animation:none!important}.brand img{transition:none!important}}
+
+/* Constrain the horizontally scrollable mobile navigation to its own rail. */
+html,body{max-width:100%;overflow-x:clip}
+.navlinks{min-width:0}
+@media(max-width:760px){.navlinks{max-width:100vw;overscroll-behavior-x:contain}}
