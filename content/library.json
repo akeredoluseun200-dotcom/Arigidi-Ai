@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": "quran",
+    "category": "quran",
+    "title": "Arigidi Akoko Quran",
+    "description": "Original Arigidi and English parallel Quran, with surah navigation.",
+    "format": "PDF",
+    "url": "https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/Arigidi-Quran.pdf",
+    "action": "Read Quran PDF"
+  },
+  {
+    "id": "new-testament",
+    "category": "bible",
+    "title": "Arigidi New Testament",
+    "description": "Original Arigidi Bible, 2ND EDITION New Testament.",
+    "format": "PDF",
+    "url": "https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/Arigidi-New-Testament-2ND-Edition.pdf",
+    "action": "Read New Testament PDF"
+  },
+  {
+    "id": "old-testament",
+    "category": "bible",
+    "title": "Arigidi Old Testament",
+    "description": "Original Arigidi Bible, 2ND EDITION Old Testament manuscript.",
+    "format": "DOC",
+    "url": "https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/Arigidi-Old-Testament-2ND-Edition.doc",
+    "action": "Open Old Testament DOC"
+  }
+]
