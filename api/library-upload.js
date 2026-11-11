@@ -8,7 +8,7 @@ export default async function handler(req,res){
     if(payload!==process.env.KAIKAI_UPLOAD_SECRET)throw new Error('Unauthorized');
     if(!/^library\/(?:Arigidi-[A-Za-z0-9.-]+\.(?:pdf|doc)|Baba-Kaikai\.(?:png|jpe?g))$/.test(pathname))throw new Error('Invalid file name');
     const isImage=/\.(?:png|jpe?g)$/i.test(pathname);
-    return {allowedContentTypes:isImage?['image/png','image/jpeg']:['application/pdf','application/msword','application/octet-stream'],maximumSizeInBytes:30*1024*1024,addRandomSuffix:false,tokenPayload:'kaikai-library'};
+    return {allowedContentTypes:isImage?['image/png','image/jpeg']:['application/pdf','application/msword','application/json','application/octet-stream'],maximumSizeInBytes:30*1024*1024,addRandomSuffix:false,tokenPayload:'kaikai-library'};
    },onUploadCompleted:async()=>{}});
   res.status(200).json(result);
  }catch(e){res.status(400).json({error:'Upload authorization failed'});}
