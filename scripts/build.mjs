@@ -38,6 +38,10 @@ if(reader.bible.length!==66||reader.quran.length!==114||reader.bible.reduce((n,b
  throw Error('Bible or Kuran table of contents mismatches the original Drive PDFs');
 }
 fs.writeFileSync('dist/content/reader-index.json',JSON.stringify(reader));
+const quick=JSON.parse(zlib.inflateSync(Buffer.from(fs.readFileSync('content/quick-index.z64','utf8').trim(),'base64')).toString('utf8'));
+if(quick.bible.length!==66||quick.quran.length!==114)throw Error('Incomplete quick-read document map');
+fs.writeFileSync('dist/content/quick-index.json',JSON.stringify(quick));
+
 fs.writeFileSync('dist/robots.txt','User-agent: *\nAllow: /\n');
 console.log('KAIKAI production site built with '+excerpts.length+' indexed scripture excerpts');
-console.log('Reader: 66 books, 1,189 Bible chapters, 114 surahs');
+console.log('Reader: 66 books, 1,189 Bible chapters, 114 surahs, 180 fast-loading PDFs');
