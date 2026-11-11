@@ -1,0 +1,1 @@
+import fs from 'node:fs';import zlib from 'node:zlib';const encoded=fs.readFileSync('source/index.html.gz.b64','utf8').trim();fs.writeFileSync('index.html',zlib.gunzipSync(Buffer.from(encoded,'base64')));console.log('Restored complete readable site as index.html');
