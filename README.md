@@ -7,7 +7,7 @@ The Kaikai Foundation digital home for Arigidi Akoko language learning, Scriptur
 **GitHub:** https://github.com/akeredoluseun200-dotcom/Arigidi-Ai  
 **Vercel project:** `kaikai-foundation-arigidi`
 
-## Version 2.4 — Faster scripture reading and animated experience
+## Version 2.5 — Mobile-first learning and reading experience
 
 The new source materials are the user's authenticated Google Drive folder:
 https://drive.google.com/drive/folders/1g75VvHxmHH2EFr9j59CVGHL9PUN--KIg
@@ -15,6 +15,10 @@ https://drive.google.com/drive/folders/1g75VvHxmHH2EFr9j59CVGHL9PUN--KIg
 - **The Holy Bible, Arigidi Akoko, 2ND EDITION** — complete 2,186-page PDF, 66 books and 1,189 source-linked chapters.
 - **Kuran Arigidi Akoko** — complete 1,649-page PDF, 114 surahs, with source-linked reading pages. No edition label.
 - **Portrait of Baba Kaikai** — the exact original photo used for the site identity/favicon and homepage, recovered from the Foundation Bible PDF without regenerating it. Its SHA256 is `d294ef044377695595daef23520ae9ab94a78c9927e94219e44a92b2669753dd`.
+- **Redesigned mobile UI:** compact navigation, bottom Discover / Academy / Words / Read bar, cleaner mobile header, shorter homepage hero, larger touch targets and book selector.
+- **Direct mobile Scripture reader:** PDF.js now renders original pages directly into a responsive canvas on mobile, with previous/next page buttons and left/right swipe paging. The original PDFs remain accessible as a fallback, and chapters retain their verified references.
+- **Editorial name clarification:** the English-facing Genesis reader spells the name **Noah**; existing source-language wording in the original manuscript remains unchanged.
+- **Smoother animation:** shorter mobile entrances, refined text reveals and accessibility-friendly reduced-motion behavior.
 - **Faster book access:** original manuscript pages are preserved in 66 smaller Bible-book PDFs and 114 smaller Kuran-surah PDFs (180 total), hosted in public Vercel Blob. Switching books no longer loads the full 18.7 MB Bible or 41 MB Kuran. The complete original files remain linked.
 - **Motion and navigation:** swipe-up scroll reveals, slide-in page transitions, reduced-motion accessibility, mobile overflow fix, and the portrait/logo navigates to Discover.
 - The reading room is a fully responsive PDF navigator with searchable Bible books and Quran surahs, chapter controls, previous/next, zoom, direct PDF access, and same-device reading progress.
@@ -36,6 +40,7 @@ https://drive.google.com/drive/folders/1g75VvHxmHH2EFr9j59CVGHL9PUN--KIg
 - `assets/v23.css`: new responsive visual design and typography.
 - `assets/site-enhancements.js`: logo, hero portrait, navigation, source library links and homepage heritage feature.
 - `content/quick-index.z64`: file-to-chapter mapping for all 180 lightweight original-page PDF readers.
+- `assets/mobile-v25.css`, `assets/mobile-ui.js` and `assets/mobile-pdf.js`: mobile-first screen design and original-page canvas rendering.
 - `assets/v24-motion.css` and `assets/motion.js`: swipe-up reveals, slide-in transitions and accessible animation controls.
 - `content/reader-index.z64`: compressed TOC extracted from the actual Drive PDFs.
 - `content/library.json` and `content/brand.json`: canonical content and brand assets.
