@@ -1,30 +1,44 @@
 # KAIKAI — The Arigidi Experience
 
-Official development repository for the Kaikai Foundation Arigidi Akoko language-learning platform.
+Official development repository for Kaikai Foundation's Arigidi Akoko learning platform.
 
-**Production site:** https://kaikai-foundation-arigidi.vercel.app
+**Live site:** https://kaikai-foundation-arigidi.vercel.app  
+**Current release:** Version 2.1 (production READY, 11 November 2026)  
+**Production Vercel project:** `kaikai-foundation-arigidi`
 
-## Current status
+## Release status
 
-Version 2 is live on Vercel. The existing production website was originally deployed using direct file uploads, so **this repository is not yet linked to that deployment**. Do not replace production with this repository until its current `index.html` and assets have been safely imported and verified.
+The Version 2 site was recovered from the existing production deployment and upgraded in a preserved copy. The new production build was deployed using this GitHub repository at commit `8ba6e91ea8dbb3406ffbb3d016228fe19a8dcf51`.
 
-## Version 2.1 goals
+Seven pages: Discover, Learn, Dictionary, Practice, Heritage, Library, **Talk to KAIKAI**.
 
-- Add downloadable Arigidi Akoko Bible **2ND EDITION** and Quran (no edition label).
-- Add a citation-grounded Arigidi language tutor with vocabulary, sentence practice, and verified references to the texts.
-- Preserve native source spellings and diacritics; never present generated or guessed translations as verified.
-- Restore the original Baba Kaikai photograph as the identity mark and home hero visual, with permission.
-- Increase comfortable body font sizes; use welcoming humanist typography, restrained green/cream/earth palette, subtle accessible motion, **no pink**.
-- Connect GitHub to the existing Vercel project only after making a verified source backup.
+- Existing dictionary, learning paths, progress and quizzes preserved.
+- Replaced pink/peach accents with deep evergreen, cream, and warm earth tones; increased font size and added accessible animation.
+- Added reference-grounded interactive tutor interface and initial scripture excerpts. Tutor currently matches words and verified source passages; it is **not yet a free-form generative chatbot**.
+- Quran and Bible exemplar passages are in `content/scriptures.json`. Quran has no edition label; Bible is labeled 2ND EDITION.
 
-## Content policy
+## Build
 
-This is a cultural preservation project. Bible and Quran translations must come from verified editions and carry the exact edition/verse/surah reference. Mark unsupported Arigidi translations as needing native-speaker review. Respect source copyright and publication permissions. Do not send the full copyrighted text to a third-party AI API without authority.
+```sh
+npm run build
+```
 
-## Planned structure
+The full preserved site lives in `source/index.html.gz.b64` as an immutable compressed source artifact. The build decompresses the original site into `dist/index.html` and installs scripture data. To restore a human-readable copy for editing locally:
 
-- `content/`: verified vocabulary and scripture evidence with provenance.
-- `features/`: isolated tutor UI prototype, safe to integrate after existing source recovered.
-- `public/`: permitted PDFs, approved photos, and audio files.
+```sh
+npm run restore-source
+```
 
-**Note:** No automatic production deployment is enabled from this repository yet.
+After editing `index.html`, recompress it with a reproducible gzip/base64 step before committing. This packaging ensures the recovered Version 2 source is preserved byte for byte.
+
+## Pending items
+
+- Publish rights-cleared original Bible/Quran PDFs to public file storage and wire download links. The original files have been recovered but **were not uploaded to the public website**.
+- Original photograph and cultural audio have not been added to production.
+- Expand verified and indexed scripture data; proofread all uncertain Arigidi text with fluent speakers.
+- Build server-side generative RAG chat with citations, privacy and rate limits if a model provider is configured.
+- The existing project can be manually deployed using GitHub `gitSource`. **Automatic Vercel Git push deployment has not been confirmed.**
+
+## Language integrity
+
+Original spelling, diacritics and publication attribution must be preserved. The site must never present invented Arigidi translations as verified. Check permissions before public redistribution of original books, photographs and audio.
