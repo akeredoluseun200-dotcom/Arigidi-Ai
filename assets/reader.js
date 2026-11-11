@@ -5,7 +5,7 @@ const PDF={
   quran:'https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/Arigidi-Kuran-Complete.pdf'
 };
 const $=s=>document.querySelector(s);
-const els={bible:$('#tab-bible'),quran:$('#tab-quran'),search:$('#library-search'),count:$('#rail-count'),list:$('#book-list'),title:$('#selected-title'),description:$('#reading-description'),chapters:$('#chapter-list'),chapterTitle:$('#chapter-heading'),chapterCount:$('#chapter-count'),edition:$('#edition-label'),location:$('#reading-location'),frame:$('#reader-pdf'),full:$('#full-book-link'),prev:$('#prev-chapter'),next:$('#next-chapter'),zin:$('#zoom-in'),zout:$('#zoom-out'),zlabel:$('#zoom-value')};
+const els={bible:$('#tab-bible'),quran:$('#tab-quran'),search:$('#library-search'),count:$('#rail-count'),list:$('#book-list'),title:$('#selected-title'),description:$('#reading-description'),chapters:$('#chapter-list'),chapterTitle:$('#chapter-heading'),chapterCount:$('#chapter-count'),edition:$('#edition-label'),location:$('#reading-location'),frame:$('#reader-pdf'),full:$('#full-book-link'),prev:$('#prev-chapter'),next:$('#next-chapter'),zin:$('#zoom-in'),zout:$('#zoom-out'),zlabel:$('#zoom-value'),mobileBook:$('#mobile-book-select')};
 const state={type:'bible',item:0,chapter:0,zoom:110,index:null,quick:null};
 const QUICK_BASE='https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/';
 const requestedCollection=new URLSearchParams(window.location.search).get('collection');
@@ -30,7 +30,12 @@ function syncFrame(){
  const quickPage=state.type==='bible'?quick?.chapters?.[state.chapter]||1:1;
  const readerURL=quick?QUICK_BASE+encodeURIComponent(quick.file)+'#page='+quickPage+'&zoom='+state.zoom:PDF[state.type]+'#page='+page+'&zoom='+state.zoom;
  els.frame.parentElement.classList.add('pdf-loading');
- if(els.frame.src!==readerURL)els.frame.src=readerURL;
+ const mobile=window.matchMedia('(max-width:760px)').matches;
+ if(!mobile&&els.frame.src!==readerURL)els.frame.src=readerURL;
+ if(mobile&&els.frame.getAttribute('src'))els.frame.removeAttribute('src');
+ const payload={url:readerURL,page:quick?quickPage:page,zoom:state.zoom,fullURL:PDF[state.type]+'#page='+page,collection:state.type,book:x.name,chapter};
+ window.__kaikaiReaderCurrent=payload;
+ window.dispatchEvent(new CustomEvent('kaikai:readerchange',{detail:payload}));
  els.description.textContent+=(quick?' · Fast-loading original pages':' · Complete original PDF');
  els.zlabel.textContent=state.zoom+'%';
  const atStart=state.item===0&&state.chapter===0;
@@ -52,6 +57,12 @@ function renderChapters(){
   els.chapters.append(b);
  }
  els.chapters.querySelector('.current')?.scrollIntoView({block:'nearest',inline:'nearest'});
+}
+function renderMobilePicker(){
+ if(!els.mobileBook)return;
+ const options=items();els.mobileBook.replaceChildren();
+ options.forEach((x,i)=>{const option=document.createElement('option');option.value=String(i);option.textContent=state.type==='bible'?x.name:(x.number+'. '+x.name);els.mobileBook.append(option)});
+ els.mobileBook.value=String(state.item);
 }
 function renderList(){
  const entries=items(),query=els.search.value.trim().toLowerCase();
@@ -77,7 +88,7 @@ function render(){
  if(!state.index)return;
  els.bible.classList.toggle('selected',state.type==='bible');els.quran.classList.toggle('selected',state.type==='quran');
  els.bible.setAttribute('aria-pressed',String(state.type==='bible'));els.quran.setAttribute('aria-pressed',String(state.type==='quran'));
- renderList();renderChapters();syncFrame();
+ renderMobilePicker();renderList();renderChapters();syncFrame();
 }
 function step(direction){
  let next=state.chapter+direction;
@@ -90,6 +101,7 @@ function step(direction){
 els.bible.addEventListener('click',()=>setType('bible'));
 els.quran.addEventListener('click',()=>setType('quran'));
 els.search.addEventListener('input',()=>renderList());
+if(els.mobileBook)els.mobileBook.addEventListener('change',()=>{state.item=Number(els.mobileBook.value)||0;state.chapter=0;render()});
 els.prev.addEventListener('click',()=>step(-1));
 els.next.addEventListener('click',()=>step(1));
 els.zin.addEventListener('click',()=>{state.zoom=Math.min(170,state.zoom+10);syncFrame()});
