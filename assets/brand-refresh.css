@@ -1,0 +1,45 @@
+/* KAIKAI / Brand refresh – designed for warmth, readability, accessibility */
+:root {
+ --pine:#123f36!important;--dark:#132921!important;--cream:#f7f4ea!important;
+ --muted:#5a6c60!important;--line:#d7ddd2!important;--orange:#a67545!important;
+ --soft:#eee5d4!important;
+}
+body{font-family:"Nunito Sans","DM Sans",system-ui,sans-serif!important;font-size:17px!important;line-height:1.7!important;background:#f7f4ea!important;color:#132921!important;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:"DM Serif Display",Georgia,serif!important;letter-spacing:-.025em}
+h1{line-height:1.06!important}h2{line-height:1.17!important}
+p,li,.desc{line-height:1.7!important}
+header{background:#f7f4eaf0!important;border-color:#d7ddd2!important}
+.nav{gap:22px}.brand{font-family:"DM Serif Display",Georgia,serif!important;font-weight:400!important;letter-spacing:-.06em!important;font-size:clamp(24px,3vw,31px)!important}
+.brand span{font-family:"Nunito Sans",system-ui,sans-serif!important;font-size:10px!important;letter-spacing:.18em!important;font-weight:800!important}
+.navlinks button{font-size:14px!important;white-space:nowrap}
+button,a,input{touch-action:manipulation}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #a67545!important;outline-offset:3px!important}
+.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero:before{content:"";position:absolute;width:min(75vw,760px);height:min(75vw,760px);right:-17%;top:-25%;border-radius:50%;border:1px solid #ddcb9b32;box-shadow:0 0 0 70px #d5bb8530,0 0 0 145px #d5bb8512;pointer-events:none;z-index:-1}
+.hero .inner{position:relative;z-index:1}
+.hero h1{font-size:clamp(3.6rem,7.1vw,7.6rem)!important;max-width:930px}
+.hero .eyebrow,.label{letter-spacing:.17em!important;font-weight:800!important}
+.pageHead{padding-top:clamp(36px,5vw,76px)}
+.pageHead h2{font-size:clamp(2.65rem,5vw,5.2rem)!important}
+.pageHead .desc{font-size:clamp(1.08rem,1.5vw,1.3rem)!important;max-width:720px}
+.book,.feature,.course,.stat,.quote{border-radius:18px!important}
+.book{border:1px solid #d7ddd2;box-shadow:0 6px 20px #13292108}
+.book h3{line-height:1.05}
+.book .soon{background:#e7e7dd!important;color:#526255!important;border-radius:7px!important}
+.library-actions{margin:22px 0 0;display:flex;flex-wrap:wrap;gap:12px}
+.library-actions a,.library-actions button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:#d9ba81;color:#183a31!important;padding:12px 18px;border-radius:10px;text-decoration:none;font-size:15px;font-weight:850;border:1px solid #caad78}
+.library-actions a:hover,.library-actions button:hover{background:#efd9a9}
+.library-actions .secondary{background:transparent;border-color:#d2dbd0;color:#f7f4ea!important}
+.kaikai-tutor-intro{max-width:900px;margin:auto auto 28px}
+.kaikai-tutor-intro strong{color:#174b3c}
+.kaikai-original-image{object-fit:cover;object-position:center;border-radius:12px}
+.k-proof{display:flex;gap:13px;align-items:flex-start;margin:24px 0 0;color:#5a6c60;font-size:14px}
+.k-proof:before{content:"";display:block;width:3px;height:42px;background:#a67545;flex:none}
+.kaikai-brand-lockup{display:inline-flex;align-items:center;gap:13px}
+.kaikai-brand-lockup img{width:42px;height:42px;object-fit:cover;border-radius:50%;border:2px solid #d3bd8e}
+@media(prefers-reduced-motion:no-preference){
+ .book,.course,.feature,button{transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease}
+ .book:hover,.course:hover{transform:translateY(-4px);box-shadow:0 18px 40px #122d271c}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media(max-width:760px){.nav{padding:14px 18px!important;flex-wrap:wrap}.navlinks{width:100%;overflow-x:auto;scrollbar-width:thin;gap:3px!important}.navlinks button{font-size:13px!important;padding:10px!important}.hero h1{font-size:clamp(3.1rem,11vw,5rem)!important}.pageHead h2{font-size:clamp(2.3rem,8vw,3.5rem)!important}}
