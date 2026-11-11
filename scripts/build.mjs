@@ -6,7 +6,12 @@ const archive=fs.readFileSync(path.join(root,'source','index.html.gz.b64'),'utf8
 const html=zlib.gunzipSync(Buffer.from(archive,'base64')).toString('utf8');
 if(!html.includes('id="dictionary"')||!html.includes('id="tutor"'))throw new Error('Site source missing required pages');
 fs.mkdirSync('dist/content',{recursive:true});
-fs.writeFileSync('dist/index.html',html);
+let enhanced=html.replace('</head>','<link rel="stylesheet" href="/assets/brand-refresh.css"></head>').replace('</body>','<script defer src="/assets/site-enhancements.js"></script></body>');
+fs.writeFileSync('dist/index.html',enhanced);
+fs.mkdirSync('dist/assets',{recursive:true});
+fs.copyFileSync('assets/brand-refresh.css','dist/assets/brand-refresh.css');
+fs.copyFileSync('assets/site-enhancements.js','dist/assets/site-enhancements.js');
+if(fs.existsSync('content/library.json'))fs.copyFileSync('content/library.json','dist/content/library.json');
 fs.copyFileSync('content/scriptures.json','dist/content/scriptures.json');
 fs.writeFileSync('dist/robots.txt','User-agent: *\\nAllow: /\\n');
 console.log('Built Kaikai experience: '+html.length+' characters');
