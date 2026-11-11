@@ -6,7 +6,8 @@ const PDF={
 };
 const $=s=>document.querySelector(s);
 const els={bible:$('#tab-bible'),quran:$('#tab-quran'),search:$('#library-search'),count:$('#rail-count'),list:$('#book-list'),title:$('#selected-title'),description:$('#reading-description'),chapters:$('#chapter-list'),chapterTitle:$('#chapter-heading'),chapterCount:$('#chapter-count'),edition:$('#edition-label'),location:$('#reading-location'),frame:$('#reader-pdf'),full:$('#full-book-link'),prev:$('#prev-chapter'),next:$('#next-chapter'),zin:$('#zoom-in'),zout:$('#zoom-out'),zlabel:$('#zoom-value')};
-const state={type:'bible',item:0,chapter:0,zoom:110,index:null};
+const state={type:'bible',item:0,chapter:0,zoom:110,index:null,quick:null};
+const QUICK_BASE='https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/';
 const requestedCollection=new URLSearchParams(window.location.search).get('collection');
 let saved=null;
 try{saved=JSON.parse(localStorage.getItem('kaikai-reader-progress-v1')||'null')}catch(_){}
@@ -25,7 +26,12 @@ function syncFrame(){
  els.edition.textContent=state.type==='bible'?'THE BIBLE · 2ND EDITION':'THE KURAN · ARIGIDI AKOKO';
  els.location.textContent=state.type==='bible'?x.name+' · Chapter '+chapter:'Surah '+x.number+' · '+x.name;
  els.full.href=PDF[state.type]+'#page='+page;
- els.frame.src=PDF[state.type]+'#page='+page+'&zoom='+state.zoom;
+ const quick=state.quick?.[state.type]?.[state.item];
+ const quickPage=state.type==='bible'?quick?.chapters?.[state.chapter]||1:1;
+ const readerURL=quick?QUICK_BASE+encodeURIComponent(quick.file)+'#page='+quickPage+'&zoom='+state.zoom:PDF[state.type]+'#page='+page+'&zoom='+state.zoom;
+ els.frame.parentElement.classList.add('pdf-loading');
+ if(els.frame.src!==readerURL)els.frame.src=readerURL;
+ els.description.textContent+=(quick?' · Fast-loading original pages':' · Complete original PDF');
  els.zlabel.textContent=state.zoom+'%';
  const atStart=state.item===0&&state.chapter===0;
  const atEnd=state.item===items().length-1&&state.chapter===chapterCount()-1;
@@ -76,7 +82,7 @@ function render(){
 function step(direction){
  let next=state.chapter+direction;
  if(state.type==='quran'){state.item+=direction;state.chapter=0}
- else if(next<0){state.item--;state.chapter=Math.max(0,chapterCount()-1)}
+ else if(next<0){state.item--;state.chapter=Math.max(0,items()[state.item]?.chapters?.length-1)}
  else if(next>=chapterCount()){state.item++;state.chapter=0}
  else state.chapter=next;
  state.item=Math.max(0,Math.min(items().length-1,state.item));render();
@@ -88,9 +94,14 @@ els.prev.addEventListener('click',()=>step(-1));
 els.next.addEventListener('click',()=>step(1));
 els.zin.addEventListener('click',()=>{state.zoom=Math.min(170,state.zoom+10);syncFrame()});
 els.zout.addEventListener('click',()=>{state.zoom=Math.max(70,state.zoom-10);syncFrame()});
-fetch('/content/reader-index.json').then(r=>{if(!r.ok)throw new Error('Catalogue unavailable');return r.json()}).then(data=>{
+els.frame.addEventListener('load',()=>els.frame.parentElement.classList.remove('pdf-loading'));
+Promise.all([
+ fetch('/content/reader-index.json').then(r=>{if(!r.ok)throw new Error('Catalogue unavailable');return r.json()}),
+ fetch('/content/quick-index.json').then(r=>r.ok?r.json():null).catch(()=>null)
+]).then(([data,quick])=>{
  if(!Array.isArray(data.bible)||data.bible.length!==66||!Array.isArray(data.quran)||data.quran.length!==114)throw new Error('Incomplete scripture catalogue');
  state.index=data;
+ if(quick?.bible?.length===66&&quick?.quran?.length===114)state.quick=quick;
  if(saved&&['bible','quran'].includes(saved.type)){
   state.type=saved.type;
   state.item=Math.min(Math.max(Number(saved.item)||0,0),items().length-1);
