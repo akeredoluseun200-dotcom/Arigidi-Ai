@@ -1,23 +1,43 @@
 import fs from 'node:fs';
 import zlib from 'node:zlib';
 import path from 'node:path';
+
 const root=process.cwd();
-const archive=fs.readFileSync(path.join(root,'source','index.html.gz.b64'),'utf8').trim();
+const archive=fs.readFileSync(path.join(root,'source/index.html.gz.b64'),'utf8').trim();
 const html=zlib.gunzipSync(Buffer.from(archive,'base64')).toString('utf8');
-if(!html.includes('id="dictionary"')||!html.includes('id="tutor"'))throw new Error('Site source missing required pages');
+if(!html.includes('id="dictionary"')||!html.includes('id="tutor"')||!html.includes('id="library"'))throw Error('Core learning pages missing');
+
+const photo='https://ctgc6eaiyducczq7.public.blob.vercel-storage.com/library/Baba-Kaikai.jpeg';
+const fonts='<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400,20;9..144,600,20;9..144,700,20&family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">';
+const branding='<link rel="icon" type="image/jpeg" href="'+photo+'"><meta property="og:image" content="'+photo+'"><meta name="theme-color" content="#172e37">';
+let enhanced=html.replace(
+ 'Here are original-source passages connected to your question.',
+ 'These are short recorded excerpts. Read the original Bible or Kuran for the complete passage. We do not invent Arigidi translations.'
+).replace('</head>',fonts+branding+'<link rel="stylesheet" href="/assets/brand-refresh.css"><link rel="stylesheet" href="/assets/v23.css"></head>')
+.replace('</body>','<script defer src="/assets/site-enhancements.js"></script></body>');
+
 fs.mkdirSync('dist/content',{recursive:true});
-let enhanced=html.replace('Here are original-source passages connected to your question.','These are short, source-matched excerpts, not necessarily complete verses. Follow the book reference to read the passage in context.').replace('</head>','<link rel="stylesheet" href="/assets/brand-refresh.css"></head>').replace('</body>','<script defer src="/assets/site-enhancements.js"></script></body>');
-fs.writeFileSync('dist/index.html',enhanced);
 fs.mkdirSync('dist/assets',{recursive:true});
-fs.copyFileSync('assets/brand-refresh.css','dist/assets/brand-refresh.css');
-fs.copyFileSync('assets/site-enhancements.js','dist/assets/site-enhancements.js');
-if(fs.existsSync('content/library.json'))fs.copyFileSync('content/library.json','dist/content/library.json');
-if(fs.existsSync('content/brand.json'))fs.copyFileSync('content/brand.json','dist/content/brand.json');
-const parts=['content/scripture-index.01.b64','content/scripture-index.02.b64'];
-const decoded=zlib.gunzipSync(Buffer.from(parts.map(p=>fs.readFileSync(p,'utf8').trim()).join(''),'base64'));
-const excerpts=JSON.parse(decoded.toString('utf8'));
-if(!Array.isArray(excerpts)||excerpts.length<1200)throw new Error('Scripture reference index incomplete');
+fs.writeFileSync('dist/index.html',enhanced);
+fs.copyFileSync('pages/reader.html','dist/reader.html');
+for(const name of ['brand-refresh.css','v23.css','site-enhancements.js','reader.css','reader.js']){
+ fs.copyFileSync('assets/'+name,'dist/assets/'+name);
+}
+for(const name of ['brand.json','library.json']){
+ fs.copyFileSync('content/'+name,'dist/content/'+name);
+}
+const sources=['content/scripture-index.01.b64','content/scripture-index.02.b64'];
+const data=zlib.gunzipSync(Buffer.from(sources.map(p=>fs.readFileSync(p,'utf8').trim()).join(''),'base64'));
+const excerpts=JSON.parse(data.toString('utf8'));
+if(!Array.isArray(excerpts)||excerpts.length<1200)throw Error('Scripture reference corpus incomplete');
 fs.writeFileSync('dist/content/scriptures.json',JSON.stringify(excerpts));
-console.log('Indexed '+excerpts.length+' Arigidi scripture excerpts with source references');
-fs.writeFileSync('dist/robots.txt','User-agent: *\\nAllow: /\\n');
-console.log('Built Kaikai experience: '+html.length+' characters');
+
+const readerEncoded=fs.readFileSync('content/reader-index.z64','utf8').trim();
+const reader=JSON.parse(zlib.inflateSync(Buffer.from(readerEncoded,'base64')).toString('utf8'));
+if(reader.bible.length!==66||reader.quran.length!==114||reader.bible.reduce((n,b)=>n+b.chapters.length,0)!==1189){
+ throw Error('Bible or Kuran table of contents mismatches the original Drive PDFs');
+}
+fs.writeFileSync('dist/content/reader-index.json',JSON.stringify(reader));
+fs.writeFileSync('dist/robots.txt','User-agent: *\nAllow: /\n');
+console.log('KAIKAI production site built with '+excerpts.length+' indexed scripture excerpts');
+console.log('Reader: 66 books, 1,189 Bible chapters, 114 surahs');
