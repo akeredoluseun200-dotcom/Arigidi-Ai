@@ -1,0 +1,75 @@
+[
+  {
+    "id": "quran-1-1",
+    "tradition": "quran",
+    "reference": "Surah 1:1",
+    "arigidi": "I eyin Allahu Ajọkẹ ẹka, aṣakẹ arunran.",
+    "english": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+    "verified": true,
+    "source": "Kuran_Arigidi Akoko_english Nov2.pdf, p.1"
+  },
+  {
+    "id": "quran-1-2",
+    "tradition": "quran",
+    "reference": "Surah 1:2",
+    "arigidi": "Akuku idupẹ si inaa Allahu, inẹn i kan ifẹ irin inẹn i si ja ẹka da.",
+    "english": "[All] praise is [due] to Allah, Lord of the worlds -",
+    "verified": true,
+    "source": "Kuran_Arigidi Akoko_english Nov2.pdf, p.1"
+  },
+  {
+    "id": "quran-1-3",
+    "tradition": "quran",
+    "reference": "Surah 1:3",
+    "arigidi": "Inẹn i si tanju akuku ẹka, inẹn i si ke itanju ẹdan okoju ẹnẹn i arunran.",
+    "english": "The Entirely Merciful, the Especially Merciful,",
+    "verified": true,
+    "source": "Kuran_Arigidi Akoko_english Nov2.pdf, p.1"
+  },
+  {
+    "id": "quran-1-4",
+    "tradition": "quran",
+    "reference": "Surah 1:4",
+    "arigidi": "Inẹn i ẹgẹn a ke ẹjọ si ọwọ o.",
+    "english": "Sovereign of the Day of Recompense.",
+    "verified": true,
+    "source": "Kuran_Arigidi Akoko_english Nov2.pdf, p.1"
+  },
+  {
+    "id": "quran-1-5",
+    "tradition": "quran",
+    "reference": "Surah 1:5",
+    "arigidi": "Ẹdan aran nwọn o sẹn, irin iranlọwọ rin nwọn o be.",
+    "english": "It is You we worship and You we ask for help.",
+    "verified": true,
+    "source": "Kuran_Arigidi Akoko_english Nov2.pdf, p.1"
+  },
+  {
+    "id": "quran-1-6",
+    "tradition": "quran",
+    "reference": "Surah 1:6",
+    "arigidi": "Gba uworo tororo ga o.",
+    "english": "Guide us to the straight path -",
+    "verified": true,
+    "source": "Kuran_Arigidi Akoko_english Nov2.pdf, p.1"
+  },
+  {
+    "id": "quran-1-7",
+    "tradition": "quran",
+    "reference": "Surah 1:7",
+    "arigidi": "Uworo awọn ẹnẹn i rin ke eje - atun yan a si ikande irin (uworo) awọn ẹnẹn arẹfọ irin (uworo)",
+    "english": "awọn ẹnẹn i gbegiri dun efa. The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.",
+    "verified": true,
+    "source": "Kuran_Arigidi Akoko_english Nov2.pdf, p.1"
+  },
+  {
+    "id": "bible-matthew-1-1",
+    "tradition": "bible",
+    "reference": "Matthew 1:1",
+    "arigidi": "Iwe iran Jesu Kristi, uwọn ọkọre Dafidi, uwọn ọkọre Abrahamu.",
+    "english": "",
+    "verified": true,
+    "edition": "2ND EDITION",
+    "source": "TANTAN MAJEMU New Testament Bible Arigidi 2nd edition.pdf, p.1"
+  }
+]
