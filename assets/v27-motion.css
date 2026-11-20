@@ -1,0 +1,86 @@
+/* KAIKAI v2.7 — cross-device motion, with accessible mobile timing.
+   Keep the existing palette and layout. Motion enhances, never hides vital content. */
+@media(prefers-reduced-motion:no-preference){
+  /* Let page transitions remain visible on tablets and small phones. */
+  .page.active{
+    animation:kk27-route-in .48s cubic-bezier(.2,.8,.2,1) both!important;
+  }
+  @keyframes kk27-route-in{
+    from{opacity:.55;transform:translate3d(0,18px,0)}
+    to{opacity:1;transform:translate3d(0,0,0)}
+  }
+  /* Reveal only elements observed and activated by JS. Never obscure disabled-JS content. */
+  .kk27-observed.kaikai-reveal:not(.kaikai-inview){
+    opacity:0!important;
+    transform:translate3d(0,24px,0)!important;
+    filter:none!important;
+  }
+  .kk27-observed.kaikai-reveal.kaikai-inview{
+    opacity:1!important;
+    transform:translate3d(0,0,0)!important;
+    filter:none!important;
+  }
+  .kk27-observed.kaikai-reveal{
+    transition:opacity .68s cubic-bezier(.2,.8,.2,1),transform .68s cubic-bezier(.2,.8,.2,1)!important;
+    transition-delay:var(--reveal-delay,0ms)!important;
+  }
+  .kaikai-mobile-nav{
+    animation:kk27-nav-dock .5s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes kk27-nav-dock{
+    from{opacity:.4;transform:translate3d(0,16px,0)}
+    to{opacity:1;transform:translate3d(0,0,0)}
+  }
+  .kaikai-menu-panel:not([hidden]){
+    transform-origin:top right;
+    animation:kk27-menu-enter .25s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes kk27-menu-enter{
+    from{opacity:0;transform:translate3d(0,-8px,0) scale(.97)}
+    to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+  }
+  .kaikai-mobile-link,.kaikai-menu-toggle,.kaikai-menu-panel button,.kaikai-menu-panel a,
+  .chapter-list button,.collection-tabs button,.mobile-page-controls button,.reader-controls button{
+    transition:background-color .22s ease,color .22s ease,transform .22s ease,box-shadow .22s ease!important;
+  }
+  .kaikai-mobile-link:active,.kaikai-menu-toggle:active,.chapter-list button:active,
+  .mobile-page-controls button:not(:disabled):active{transform:scale(.95)!important}
+  .kaikai-mobile-link.current{
+    animation:kk27-tab-highlight .32s ease both;
+  }
+  @keyframes kk27-tab-highlight{
+    from{box-shadow:inset 0 0 0 1px transparent}
+    to{box-shadow:inset 0 0 0 1px rgba(23,46,55,.13)}
+  }
+  .mobile-pdf-canvas-wrap canvas.is-visible{
+    animation:kk27-page-appear .38s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes kk27-page-appear{
+    from{opacity:.55;transform:translate3d(0,10px,0)}
+    to{opacity:1;transform:translate3d(0,0,0)}
+  }
+  #home .hero .inner>*{
+    animation:kk27-hero-enter .7s cubic-bezier(.2,.8,.2,1) both!important;
+  }
+  #home .hero .inner>*:nth-child(2){animation-delay:.1s!important}
+  #home .hero .inner>*:nth-child(3){animation-delay:.18s!important}
+  #home .hero .inner>*:nth-child(4){animation-delay:.24s!important}
+  @keyframes kk27-hero-enter{
+    from{opacity:0;transform:translate3d(0,18px,0)}
+    to{opacity:1;transform:translate3d(0,0,0)}
+  }
+}
+@media(max-width:760px) and (prefers-reduced-motion:no-preference){
+  .page.active{animation-duration:.4s!important}
+  .kk27-observed.kaikai-reveal:not(.kaikai-inview){transform:translate3d(0,19px,0)!important}
+  .kk27-observed.kaikai-reveal{transition-duration:.52s!important;transition-delay:var(--reveal-delay,0ms)!important}
+  .reader-main{animation:kk27-route-in .42s cubic-bezier(.2,.8,.2,1) both!important}
+  .mobile-pdf-canvas-wrap canvas{will-change:opacity}
+  #home .hero .inner>*{animation-duration:.58s!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .page.active,.reader-main,.kaikai-mobile-nav,.kaikai-menu-panel,.mobile-pdf-canvas-wrap canvas,
+ #home .hero .inner>*,.kk27-observed.kaikai-reveal{
+    animation:none!important;transition:none!important;transform:none!important;opacity:1!important;filter:none!important
+ }
+}
