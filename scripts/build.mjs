@@ -13,15 +13,15 @@ const branding='<link rel="icon" type="image/jpeg" href="'+photo+'"><meta proper
 let enhanced=html.replace(
  'Here are original-source passages connected to your question.',
  'These are short recorded excerpts. Read the original Bible or Kuran for the complete passage. We do not invent Arigidi translations.'
-).replace('</head>',fonts+branding+'<link rel="stylesheet" href="/assets/brand-refresh.css"><link rel="stylesheet" href="/assets/v23.css"><link rel="stylesheet" href="/assets/v24-motion.css"><link rel="stylesheet" href="/assets/mobile-v25.css"></head>')
-.replace('</body>','<script defer src="/assets/site-enhancements.js"></script><script defer src="/assets/motion.js"></script><script defer src="/assets/mobile-ui.js"></script></body>');
+).replace('</head>',fonts+branding+'<link rel="stylesheet" href="/assets/brand-refresh.css"><link rel="stylesheet" href="/assets/v23.css"><link rel="stylesheet" href="/assets/v24-motion.css"><link rel="stylesheet" href="/assets/mobile-v25.css"><link rel="stylesheet" href="/assets/v26-polish.css"></head>')
+.replace('</body>','<script defer src="/assets/site-enhancements.js"></script><script defer src="/assets/motion.js"></script><script defer src="/assets/mobile-ui.js"></script><script defer src="/assets/brand-mark.js"></script></body>');
 
 fs.mkdirSync('dist/content',{recursive:true});
 fs.mkdirSync('dist/assets',{recursive:true});
 fs.writeFileSync('dist/index.html',enhanced);
-const readerHtml=fs.readFileSync('pages/reader.html','utf8').replace('</head>','<link rel="stylesheet" href="/assets/v24-motion.css"><link rel="stylesheet" href="/assets/mobile-v25.css"></head>');
+const readerHtml=fs.readFileSync('pages/reader.html','utf8').replace('</head>','<link rel="stylesheet" href="/assets/v24-motion.css"><link rel="stylesheet" href="/assets/mobile-v25.css"><link rel="stylesheet" href="/assets/v26-polish.css"></head>');
 fs.writeFileSync('dist/reader.html',readerHtml);
-for(const name of ['brand-refresh.css','v23.css','site-enhancements.js','reader.css','reader.js','v24-motion.css','motion.js','mobile-v25.css','mobile-ui.js','mobile-pdf.js']){
+for(const name of ['brand-refresh.css','v23.css','site-enhancements.js','reader.css','reader.js','v24-motion.css','motion.js','mobile-v25.css','mobile-ui.js','mobile-pdf.js','v26-polish.css','brand-mark.js','kaikai-logo.png']){
  fs.copyFileSync('assets/'+name,'dist/assets/'+name);
 }
 for(const name of ['brand.json','library.json']){
