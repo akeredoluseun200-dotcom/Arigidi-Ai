@@ -1,0 +1,65 @@
+/* KAIKAI v2.6 | refine existing interface; preserve Foundation colours and content */
+:root{--kaikai-ink:#172e37;--kaikai-cream:#f7f5ef;--kaikai-sage:#9dbfb4;--kaikai-focus:#4e847d}
+html{scroll-padding-top:90px}
+body{font-size:18px!important;line-height:1.75!important;overflow-wrap:break-word}
+button,select,input,textarea{font-family:"Nunito Sans",system-ui,sans-serif!important}
+a,button,input,select,textarea{outline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--kaikai-focus)!important}
+button,a[role=button]{min-height:44px}
+.brand.kaikai-brand-lockup{display:flex!important;align-items:center;flex:0 0 auto;max-width:min(310px,57vw);font-size:0!important;letter-spacing:0!important;line-height:0!important;padding:5px 0}
+.brand.kaikai-brand-lockup span{display:none!important}
+.brand.kaikai-brand-lockup img{height:auto!important;width:clamp(180px,19vw,250px)!important;max-width:100%;aspect-ratio:2048/682;object-fit:contain!important;border:0!important;border-radius:0!important;box-shadow:none!important;display:block}
+.nav{gap:clamp(12px,2vw,28px)!important}
+.navlinks button{font-size:14px!important;padding:12px 10px!important}
+.hero h1{max-width:13ch!important;text-wrap:balance}
+.hero p{max-width:45ch}
+.hero .inner{position:relative}
+.section h2,.pageHead h2,.reader-topline h3{letter-spacing:-.035em!important;text-wrap:balance}
+.cards .card,.libraryGrid .book,.lessonGrid>*,.heritageCard{border-radius:18px!important}
+.cards .card{transition:transform .28s ease,box-shadow .28s ease}
+#dictionary input,#tutor input, .toolbar input{min-height:50px}
+.library-actions a{min-height:50px!important}
+#tutor .kt-feed{max-height:min(58vh,580px)!important;overscroll-behavior:contain}
+#tutor .kt-msg{font-size:17px!important;line-height:1.74!important}
+.site-header .identity{gap:0!important;display:inline-flex;align-items:center}
+.site-header .identity img{width:210px!important;height:auto!important;max-width:45vw;object-fit:contain!important;border:0!important;border-radius:0!important;flex-shrink:1}
+.site-header .identity strong,.site-header .identity small{display:none!important}
+.reader-toolbar button,.reader-controls button{touch-action:manipulation}
+@media(max-width:760px){
+ html{scroll-padding-top:78px}
+ body{font-size:17px!important;line-height:1.72!important}
+ .nav{min-height:70px!important;padding:12px 16px!important}
+ .brand.kaikai-brand-lockup{max-width:64vw!important}
+ .brand.kaikai-brand-lockup img{width:clamp(170px,50vw,230px)!important;height:auto!important;max-height:60px!important;object-fit:contain!important}
+ .kaikai-menu-toggle{min-height:46px!important;padding:0 15px!important;font-size:14px!important;border-radius:12px!important}
+ .kaikai-menu-panel{border-radius:17px!important;box-shadow:0 18px 48px #172e3735!important}
+ .kaikai-menu-panel button,.kaikai-menu-panel a{font-size:16px!important;min-height:48px}
+ .kaikai-mobile-nav{padding:9px 9px calc(10px + env(safe-area-inset-bottom,0px))!important}
+ .kaikai-mobile-link{font-size:13px!important;min-height:51px!important;border-radius:12px!important}
+ #home .hero .inner{padding:225px 21px 43px!important}
+ #home .hero h1{font-size:clamp(3.05rem,10.5vw,4.45rem)!important;line-height:1.07!important}
+ #home .hero p{font-size:18px!important;line-height:1.6!important}
+ #home .hero-actions{grid-template-columns:1fr 1fr!important;gap:10px!important}
+ #home .hero-actions button{font-size:14px!important;min-height:50px!important}
+ #home .hero-actions .kaikai-footer-cta{font-size:15px!important;min-height:49px!important}
+ .wrap{padding-left:20px!important;padding-right:20px!important}
+ .section{padding:66px 0!important}
+ .section h2,.pageHead h2{font-size:clamp(2.5rem,8.8vw,3.85rem)!important}
+ .cards .card{min-height:0!important;padding:26px!important}
+ .cards .card h3{font-size:1.9rem!important}
+ .cards .card p,.libraryGrid .book p,.heritageCard p{font-size:17px!important}
+ .site-header{min-height:68px!important;padding:12px 16px!important}
+ .site-header .identity img{width:clamp(160px,49vw,220px)!important;max-width:58vw}
+ .reader-section{padding:35px 9px 100px!important}
+ .reading-shell{border-radius:17px!important}
+ .reader-toolbar{top:67px!important;padding:14px 12px!important}
+ .reader-controls button{min-height:46px!important;border-radius:11px!important}
+ .collection-tabs button,.mobile-book-picker select{min-height:52px!important;font-size:16px!important}
+ .chapter-list button{min-width:50px!important;min-height:48px!important;font-size:16px!important}
+ .mobile-pdf-canvas-wrap{padding:14px 5px 22px!important;overscroll-behavior-x:contain}
+ #tutor .kt-head h3{font-size:clamp(2.25rem,8.6vw,3.4rem)!important}
+ #tutor .kt-msg{font-size:17px!important}
+}
+@media(max-width:375px){.brand.kaikai-brand-lockup img{width:164px!important}.kaikai-menu-toggle{padding:0 10px!important}.kaikai-mobile-link{font-size:12px!important}.reader-controls{gap:4px!important}}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.cards .card:hover{transform:translateY(-4px)!important;box-shadow:0 15px 32px #172e3719!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
